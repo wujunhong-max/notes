@@ -1,0 +1,65 @@
+Verticla Layout 垂直布局
+Horizontal Layout 水平布局
+Grid Layout 		栅格布局(网格布局)
+Form Layout 		窗体布局(中间布局)两列
+
+Horizontal Spacer	水平间隔(水平弹簧）
+Verticla Spacer		垂直间隔(垂直弹簧)
+
+Push Button		普通按钮
+Tool Button		工具条按钮
+Radio Button	单选按钮
+Check Box		复选框
+Command Lind Button	
+Dialog Button Box	对话框按钮盒
+
+List View		列表
+Tree View		树
+Table View		表格
+Column View		直栏浏览(列视图)
+Undo View	 
+
+List Widget		列表控件 
+Tree Widget		Tree小部件
+Table Widget	表部件
+	
+Group Box		组框
+Scroll Area		滚动区域
+Tool Box		工具箱
+Tab Widget		
+Stacked Widget
+Frame			框架，容器
+Widget
+MDI Area
+Dock Widget
+
+Combo Box					组合框
+Font Combo Box				字体组合框
+Line Edit					行编辑
+Text Edit					文本编辑
+Plain Text Edit				纯文本编辑
+Spin Box					自旋的盒子
+Double Spin Box				双自旋的盒子
+Time Edit					时间编辑
+Date Edit					日期编辑
+Date/Time Edit				日期/时间编辑
+Dial						刻度盘
+Horizontal Scroll Bar		水平滚动条
+Verticla Scroll Bar			Verticla滚动条
+Horizontal Slider			水平滑块
+Verticla Slider				Verticla滑块
+Key Sequence Edit			键序列编辑
+
+Label						标签
+Text Browser				文本浏览器
+Graphics View				图形视图
+Calendar Widget				日历小部件
+LCD Number					液晶显示数字
+Progress Bar				进度条
+Horizontal Line				水平线
+Verticla Line				Verticla线
+OpenGL Widget 				OpenGL窗口小部件
+
+
+
+
