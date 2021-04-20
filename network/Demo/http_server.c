@@ -9,6 +9,7 @@
 #include<errno.h>
 #include<sys/socket.h>
 #include<netinet/in.h>
+#include<arpa/inet.h>
 
 int main(int argc,char* argv[])
 {
@@ -21,7 +22,7 @@ int main(int argc,char* argv[])
     struct sockaddr_in lst_addr;
     lst_addr.sin_family = AF_INET;
     lst_addr.sin_port = htons(9998);
-    lst_addr.sin_addr.s_addr = inet_addr("192.168.186.128");
+    lst_addr.sin_addr.s_addr = inet_addr("192.168.186.129");
     socklen_t len = sizeof(struct sockaddr_in);
     int ret = bind(sockfd,(struct sockaddr*)&lst_addr,len);
     if(ret<0)
@@ -37,7 +38,7 @@ int main(int argc,char* argv[])
     while(1)
     {
         struct sockaddr_in cli_addr;
-        int newfd = accept(sockfd,(struct sockaddr*)&cli_addr,&len);、
+        int newfd = accept(sockfd,(struct sockaddr*)&cli_addr,&len);
         if(newfd < 0)
         {
             perror("accept error\n");
@@ -57,7 +58,7 @@ int main(int argc,char* argv[])
         char *rsp = "<h1>hello world</h1>";
         memset(buff,0x00,1024);
         
-        sprintf(buff,"%s\r\n%s%d\r\n%s\r\n\r\n%s%","HTTP/1.1 200 OK","Content-Length:",strlen(rsp),"Content-Type:text/html:charset=UTF-8",rsp);
+        sprintf(buff,"%s\r\n%s\r\n%ld%s\r\n\r\n%s","HTTP/1.1 200 OK","Content-Length:",strlen(rsp),"Content-Type:text/html:charset=UTF-8",rsp);
         // 这里我们返回的是简单的字符串hello world          // %s \r\n   第一行输入了HTTP/1.1 200 OK
         // %s %d \r\n 这里第二行输出了Content-Length：strlen(rsp) 这里我们是向通过这个关键字告诉浏览器我们这次发送的数据是多少
         // %s \r\n 这一行输出了Content-Type:text/html:Charset = UTF-8 是告诉浏览器我们的文件格式和编码格式
