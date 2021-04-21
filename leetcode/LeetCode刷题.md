@@ -83,3 +83,12 @@ static Rank binSearch(T* A,T const& e, Rank lo, Rank hi)
 }  // 有多个命中元素时，总能保证返回秩最大者；查找失败时，能够返回失败的位置
 ```
 
+###  字符串匹配算法
+
+暴力匹配、KMP算法、BM算法、Sunday算法
+
+
+
+## 双指针
+
+用到的题目：1.移除元素
