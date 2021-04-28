@@ -267,3 +267,57 @@ typedef  unsigned long size_t;
 
 与int固定四个字节不同有所不同,size_t的取值range是目标平台下最大可能的数组尺寸,一些平台下size_t的范围小于int的正数范围,又或者大于unsigned int. 使用Int既有可能浪费，又有可能范围不够大。
 
+## int16,int32,int64
+
+Int16  意思是16位整数(16bit integer)，相当于short  占2个字节   -32768 ~ 32767
+
+Int32  意思是32位整数(32bit integer), 相当于 int      占4个字节   -2147483648 ~ 2147483647
+
+Int64  意思是64位整数(64bit interger), 相当于 long long   占8个字节   -9223372036854775808 ~ 9223372036854775807
+
+Byte  相当于byte(unsigned char)   0 ~ 255
+
+WORD 等于  unsigned short     0 ~ 65535
+
+| int16 | 16位整数(16bit integer)  | 相当于short  占2个字节       |
+| ----- | ------------------------ | ---------------------------- |
+| int32 | 32位整数(32bit integer)  | 相当于 int      占4个字节    |
+| int64 | 64位整数(64bit interger) | 相当于 long long   占8个字节 |
+| Byte  |                          | byte(unsigned char)          |
+| WORD  |                          | unsigned short               |
+
+os开发中经常遇到的数据如下的数据类型，unit8_t、unit16_t、unit32_t、unit64_t
+
+| unit8_t  | 无符号1个字节的整型 |
+| -------- | ------------------- |
+| unit16_t | 无符号2个字节的整型 |
+| unit32_t | 无符号4个字节的整型 |
+| unit64_t | 无符号8个字节的整型 |
+
+注：一个字节有8位。
+
+## C++ 什么是有符号，什么是无符号
+
+整型有无符号(unsigned)和有符号(signed)两种类型。
+
+在默认情况下声明的整型变量都是有符号的类型(char有点特别),如果需声明无符号类型的话就需要在类型前加上unsigned.
+
+**区别**：无符号类型能保存2倍于有符号类型的数据。
+
+比如16位系统中一个int能存储的数据的范围为-32768~32767，而unsigned能存储的数据范围则是0~65535。在一些不可能取值为负数的时候，可以定义为unsigned，
+
+## 将数据存储在数组中
+
+```c++
+// 将数据存储到数组中
+char buff[100] = {0};
+sprintf((char*)buff, " height = %-10f    x = %-10f   y = %-10f   angle = %-10f",x,y,z,angle);
+// 将数组转化为string类型
+int size_buff = sizeof(buff) / sizeof(char);
+string str = "";
+for(int x = 0; x < size_buff; x++) 
+ {
+     str = str + buff[x];
+ }
+```
+

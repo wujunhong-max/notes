@@ -315,13 +315,42 @@ Merge made by the 'recursive' strategy.
 ## 1. 创建标签
 ## 2. 操作标签
 
+# 平时遇到的问题
 
+## git pull 会将未提交的修改代码覆盖怎么办
 
+处理的方式非常简单，主要是使用git stash命令进行处理，分成以下几个步骤进行处理。
 
+```bash
+$ git stash  //先将本地修改存储起来(暂存修改)
+$ git stash list	//可以看到保存的信息：其中stash@{0}就是刚才保存的标记
+$ git pull
+$ git stash pop stash@{0}	//还原暂存的内容
+/* 系统提示如下类似的信息：
+Auto-merging c/environ.c
+CONFLICT (content): Merge conflict in c/environ.c
+意思就是系统自动合并修改的内容，但是其中有冲突，需要解决其中的冲突。 */
 
+/* 解决文件中冲突的部分
+打开冲突的文，会看到类似如下的内容：
+git冲突内容
+其中Updated upstream 和=====之间的内容就是pull下来的内容，====和stashed changes之间的内容就是本地修改的内容。碰到这种情况，git也不知道哪行内容是需要的，所以要自行确定需要的内容。
 
+解决完成之后，就可以正常的提交了。 */
+```
 
+## 怎么将分支上的一个单文件合并到主分支上
 
+```bash
+$git checkout master //切换到主分支
+$git checkout --patch 分支名称 要合并的文件路径 //选择要合并的文件
+/* 提交文件 */
+$git add -A 文件路径
+$git commit -m "注释"
+$git push
+如果不想合并只是测试  一定要回滚回来
+$git reset --hard origin/master 到上一个版本
+```
 
 
 
