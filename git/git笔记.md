@@ -325,7 +325,7 @@ Merge made by the 'recursive' strategy.
 $ git stash  //先将本地修改存储起来(暂存修改)
 $ git stash list	//可以看到保存的信息：其中stash@{0}就是刚才保存的标记
 $ git pull
-$ git stash pop stash@{0}	//还原暂存的内容
+$ git stash pop 	//还原暂存的内容
 /* 系统提示如下类似的信息：
 Auto-merging c/environ.c
 CONFLICT (content): Merge conflict in c/environ.c
@@ -352,5 +352,17 @@ $git push
 $git reset --hard origin/master 到上一个版本
 ```
 
+## 将master的内容更新到分支上
 
+```bash
+$git add commit -m "备注"    // 先提交修改的内容
+$git checkout master		// 切换到master
+$git pull				   // 将远程的master代码pull到本地
+$git checkout dev		    // 切换到dev分支下
+$git merge master     		// 合并master到dev分支
+// 如果在合并的过程中，提示Test.java文件出现冲突了，手动修改一下这个文件，修改成自己想要内容；如果没有出现冲突，直接跳到第八步
+$git add Test.java
+$git commit -m "merge master"
+$git push origin dev
+```
 
