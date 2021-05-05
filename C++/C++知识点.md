@@ -321,3 +321,22 @@ for(int x = 0; x < size_buff; x++)
  }
 ```
 
+## 链表问题: 虚拟节点dummy
+
+在链表操作中，使用一个dummy结点，可以少掉很多边界条件的判断。
+
+在链表的头部加入一个哨兵，然后连上head节点
+
+之后就把head节点当做普通节点，不用单独考虑了
+
+```c++
+ListNode *dummy = new ListNode(-1);
+dummy -> next = head;
+```
+
+最后返回
+
+```c++
+return dummy->next;
+```
+
