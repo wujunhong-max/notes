@@ -4,7 +4,8 @@
 
 int main(void)
 {
-    cJSON* cjson_test = NULL;
+     // 创建三个指针
+    cJSON* cjson_test = NULL;      
     cJSON* cjson_address = NULL;
     cJSON* cjson_skill = NULL;
     char* str = NULL;
@@ -43,4 +44,7 @@ int main(void)
 
     return 0;
 }
+
+// 编译运行：gcc cJSON.c Encapsulate_data.c -o Encapsulate_data.exe
+// ./Encapsulate_data.exe
 
