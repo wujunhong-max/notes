@@ -40,7 +40,8 @@ int main(void)
 
     /* 打印JSON对象(整条链表)的所有数据 */
     str = cJSON_Print(cjson_test);
-    printf("%s\n", str);
+    printf("%s\n", str);    
+
 
     return 0;
 }
