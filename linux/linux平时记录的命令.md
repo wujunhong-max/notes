@@ -45,4 +45,13 @@ rm  [选项] 文件名
 
 查看当前系统的代号
 
-> lsb_release -a
+> lsb_release -a 
+
+备份原来的源
+
+> cp -ra /etc/apt/sources.list /etc/apt/sources.list.bak
+
+更新缓存和升级
+
+> sudo apt-get update
+> sudo apt-get upgrade
