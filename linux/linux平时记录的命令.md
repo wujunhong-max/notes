@@ -59,3 +59,7 @@ rm  [选项] 文件名
 > sudo vi /etc/resolv.conf
 >
 > nameserver 8.8.8.8
+
+## 查看树莓派的内存
+
+> df -h
