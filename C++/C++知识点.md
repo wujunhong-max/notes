@@ -340,3 +340,21 @@ dummy -> next = head;
 return dummy->next;
 ```
 
+## 预编译指令
+
+c语言中条件编译相关的预编译指令，包括#define、 #undef、 #ifndef、#if、#elif、#else、#endif、defined
+
+```bash
+#define   定义一个预处理宏
+#undef    取消宏的定义
+
+#if       编译预处理中的条件命令，相当于C语法中的if语句
+#ifdef    判断某个宏是否被定义，若已定义，执行随后的语句
+#ifndef   与#ifdef相反,判断某个宏是否未被定义
+#elif     与#if、#ifdef、#ifndef或前面的#elif条件不满足，则执行#elif之后的			 语句，相当于C语法中的else if
+#else     与#if、#ifdef、#ifndef对应，若这些条件不满足，则执行#else之后的语		  句，相当于C语法中的else
+#endif    #if、#ifdef、#ifndef这些命令的结束标志
+defined   与#if、#elif配合使用，判断某个宏是否被定义
+		 defined(name): 若宏被定义，则返回1，否则返回0。
+```
+

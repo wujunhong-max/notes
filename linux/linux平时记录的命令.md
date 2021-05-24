@@ -55,3 +55,7 @@ rm  [选项] 文件名
 
 > sudo apt-get update
 > sudo apt-get upgrade
+
+> sudo vi /etc/resolv.conf
+>
+> nameserver 8.8.8.8
