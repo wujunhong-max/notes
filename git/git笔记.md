@@ -366,3 +366,13 @@ $git commit -m "merge master"
 $git push origin dev
 ```
 
+## 版本回退
+
+```bash
+$git log --pretty=oneline  // 查看提交历史
+$git reset --hard 版本号   // 进行版本回退
+// 或者用这个
+$git reset --hard HEAD^  // 返回上一个版本
+$git reflog  	// 查看每一条命令
+```
+
