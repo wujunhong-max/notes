@@ -39,7 +39,7 @@ rm  [选项] 文件名
 
 # 查看连接网线上的ip
 
-> apr -a
+> arp -a
 
 # ubuntu换源
 
