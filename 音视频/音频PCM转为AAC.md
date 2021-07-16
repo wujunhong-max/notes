@@ -23,7 +23,7 @@
 // 初始化所有组件，只有调用了该函数，才能使用复用器和编解码器
   av_register_all();
 
-//封装上下文AVFormatContext，该函数用于分配空间创建一个AVFormatContext对象，并且强调使用avformat_free_context方法来清理并释放该对象的空间。
+//封装上下文AVFormatContext，avformat(翻译:编解码器)，该函数用于分配空间创建一个AVFormatContext对象，并且强调使用avformat_free_context方法来清理并释放该对象的空间。
 AVFormatContext *ofmt_ctx = avformat_alloc_context();
 
 //封装上下文内部结构体，这是一个决定视频输出时封装方式的函数,其中有三个参数，写任何一个参数，都会自动匹配相应的封装方式
@@ -34,11 +34,12 @@ AVOutputFormat *oformat =av_guess_format(NULL,output,NULL);
     av_log(NULL,AV_LOG_ERROR,"fail to find the output format\n");
     return -1;
   }
+//初始化一个用于输出的AVFormatContext结构体
   if(avformat_alloc_output_context2(&ofmt_ctx,oformat,oformat->name,output) <0){
     av_log(NULL,AV_LOG_ERROR,"fail to alloc output context\n");
     return -1;
   } 
-// 流结构体AVStream，创建输出流通道
+// 流结构体AVStream，在 AVFormatContext 中创建 Stream 通道
   AVStream *out_stream = avformat_new_stream(ofmt_ctx,NULL);
   if (out_stream == NULL){
     av_log(NULL,AV_LOG_ERROR,"fail to create new stream\n");

@@ -9,7 +9,7 @@ libavdevice  - 输入输出设备的支持
 
 libavfilter  - 视音频滤镜支持
 
-libavformat  - 视音频等格式的解析
+libavformat  - 视音频等格式的解析】
 
 libavutil   - 工具库
 
@@ -375,5 +375,54 @@ AVFrame *pframe = av_frame_alloc();
  int av_samples_get_buffer_size(int *linesize, int nb_channels, int nb_samples,  
                                enum AVSampleFormat sample_fmt, int align)*/
  int size = av_samples_get_buffer_size(NULL,pCodecCtx->channels,pCodecCtx->frame_size,pCodecCtx->sample_fmt,1);
+```
+
+## FFmpeg内存的分配和释放
+
+ 内存操作的常见函数位于libavutil\mem.c中。 
+
+ av_malloc() 和 av_free() 都是简单的封装了系统函数 malloc() 和free()，并做了一些错误检查工作。同理的还有 av_realloc()。 
+
+### av_malloc()
+
+```c
+//av_malloc()是FFmpeg中最常见的内存分配函数
+uint8_t *out_buffer = (uint8_t*)av_malloc(size);
+```
+
+### av_free()
+
+```c
+// av_free()用于释放申请的内存 
+av_free(out_buffer);
+```
+
+## avcodec_fill_audio_frame()
+
+```c
+/* int avcodec_fill_audio_frame(AVFrame *frame, int nb_channels,
+enum AVSampleFormat sample_fmt, const uint8_t *buf,
+int buf_size, int align)
+将分配空间后的buffer挂到AVFrame中
+*/
+
+avcodec_fill_audio_frame(pframe,pCodecCtx->channels,pCodecCtx->sample_fmt,(const uint8_t*)out_buffer,size,1);
+```
+
+## av_samples_alloc()
+
+```c
+/*分配样本数据内存空间
+int av_samples_alloc(uint8_t **audio_data, int *linesize, int nb_channels,int nb_samples, enum AVSampleFormat sample_fmt, int align)
+
+ * @param[out] audio_data  输出数组，每个元素是指向一个通道的数据的指针。
+ * @param[out] linesize    aligned size for audio buffer(s), may be NULL
+ * @param nb_channels      通道的个数。
+ * @param nb_samples       每个通道的样本个数。
+ * @param align            buffer size alignment (0 = default, 1 = no alignment)
+ * @return                 成功返回大于0的数，错误返回负数。
+转换之前需要分配内存空间用于保存重采样的输出数据，内存空间的大小跟通道个数、样本格式需要、容纳的样本个数都有关系。libavutil中的samples处理API提供了一些函数方便管理样本数据，例如av_samples_alloc()函数用于分配存储sample的buffer。*/
+
+av_samples_alloc(data,NULL,pCodecCtx->channels,pCodecCtx->frame_size,pCodecCtx->sample_fmt,1);
 ```
 

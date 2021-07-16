@@ -33,7 +33,7 @@ ffplay -f f32le -ac 1 -ar 48000 pcm_audio
 
 如果是单声道的音频文件，采样数据按时间的先后顺序依次存入（有的时候也会采用LRLRLR方式存储，只是另一个声道的数据为0），如果是双声道的话就按照LRLRLR的方式存储，存储的时候与字节序有关。big-endian模式如下图所示：
 
-![img](photo/8744338-153ea2d12c5b58c8.webp)
+![8744338-153ea2d12c5b58c8](photo/8744338-153ea2d12c5b58c8.webp)
 
 ## FFmpeg支持的PCM数据格式
 
