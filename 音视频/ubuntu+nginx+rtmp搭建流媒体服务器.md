@@ -62,7 +62,7 @@ sudo /usr/local/nginx/sbin/nginx
 
 结果如下：
 
-![0b5217bbe8cc3c69543703d335f0b1c](photo/0b5217bbe8cc3c69543703d335f0b1c.png)
+![0b5217bbe8cc3c69543703d335f0b1c](./photo/0b5217bbe8cc3c69543703d335f0b1c.png)
 
  ##  配置nginx.conf文件
 
@@ -128,7 +128,7 @@ sudo /usr/local/nginx/sbin/nginx -s reload
 sudo /usr/local/nginx/sbin/nginx
 ```
 
-![fbd23030a7e038a2b357d7990e1d45a](photo/fbd23030a7e038a2b357d7990e1d45a.png)
+![fbd23030a7e038a2b357d7990e1d45a](./photo/fbd23030a7e038a2b357d7990e1d45a.png)
 
 ```
 //该问题是该端口被占用了
@@ -155,13 +155,13 @@ kill -9 PID
 netstat -ntlp
 ```
 
-## ![img](photo/4424012-19c5dae14acd1098.webp)
+## ![img](./photo/4424012-19c5dae14acd1098.webp)
 
 ```
 kill 6751
 ```
 
-![img](photo/4424012-17f4ab147f927810.webp)
+![img](./photo/4424012-17f4ab147f927810.webp)
 
 ```c++
 // 查看端口命令
@@ -197,17 +197,17 @@ $ wsl
 
 ## 网页上访问服务区媒体资源
 
-<img src="photo/74b950f70eabccd0a89cb4ec8749608.png" alt="74b950f70eabccd0a89cb4ec8749608" style="zoom:200%;" />
+<img src="./photo/74b950f70eabccd0a89cb4ec8749608.png" alt="74b950f70eabccd0a89cb4ec8749608" style="zoom:200%;" />
 
 ## 拉流和推流
 
 在虚拟机上
 
-![ac512d271085e4b8ee37b27a0156532](photo/ac512d271085e4b8ee37b27a0156532.png)
+![ac512d271085e4b8ee37b27a0156532](./photo/ac512d271085e4b8ee37b27a0156532.png)
 
-用云服务器![c7299111525ebcb0484edab15a3b4ee](photo/c7299111525ebcb0484edab15a3b4ee-1626769161092.png)
+用云服务器![c7299111525ebcb0484edab15a3b4ee](./photo/c7299111525ebcb0484edab15a3b4ee-1626769161092.png)
 
-![084b8b098f50fc6ae7360d45a1c588f](photo/084b8b098f50fc6ae7360d45a1c588f.png)
+![084b8b098f50fc6ae7360d45a1c588f](./photo/084b8b098f50fc6ae7360d45a1c588f.png)
 
 ## 总结
 
