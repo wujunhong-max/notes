@@ -81,12 +81,12 @@ rtmp {
         application myapp{
         live on;
         hls on;
-        hls_path /usr/local/nginx/myapp;  #视频存放路径
+        hls_path /usr/local/nginx/myapp;  #推流拉流存放路径
         }
 
         # video on demand
         application vod {
-            play /var/flvs; #指定存放视频文件的路径
+            play /opt/video/vod; #指定存放视频文件的路径
         }
 
         application vod_http {
@@ -208,6 +208,17 @@ $ wsl
 用云服务器![c7299111525ebcb0484edab15a3b4ee](./photo/c7299111525ebcb0484edab15a3b4ee-1626769161092.png)
 
 ![084b8b098f50fc6ae7360d45a1c588f](./photo/084b8b098f50fc6ae7360d45a1c588f.png)
+
+## 播放媒体服务器中的文件
+
+```
+将文件放在指定路径下
+将input.mp4文件放在了/opt/video/vod
+拉流地址：rtmp://172.20.113.219:1935/vod/input.mp4
+然后就可以播放了
+```
+
+
 
 ## 总结
 
