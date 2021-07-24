@@ -41,6 +41,7 @@ return 0;
 ## 4.C++关键字
 这些关键字不能作为常量名、变量名或其他标识符名称
 ![c++关键字](https://img-blog.csdnimg.cn/20201106161548222.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NjgxOTI0OQ==,size_16,color_FFFFFF,t_70#pic_center)
+
 ## 5.C++标识符
 C++规定给标识符（变量、常量）命名时，有一套规则
 (1)标识符不能是关键字
@@ -56,6 +57,7 @@ mohd  _temp j a23b9 rVtdh
 <font color=#999AAA > 示例：水平制表符\t 
 `cout <<"aaa\tbbb" <<endl;` 显示的结果是aaa     bbb;(在aaa后面会有5个空格）
 `cout <<"aaaa\tbbb" <<endl;` 显示的结果是aaaa    bbb;(在aaaa后面会有4个空格）
+
 # 二、数据类型
 ## 1.整型
 作用：整型变量表示的是整数类型的数据
@@ -4714,7 +4716,7 @@ void test01(){
 }
 ```
 
-![75c488c18888027f22f950094891bbc](C++.assets/75c488c18888027f22f950094891bbc.png)
+![75c488c18888027f22f950094891bbc](photo/75c488c18888027f22f950094891bbc.png)
 
 ## Vector容器嵌套容器
 
@@ -4837,7 +4839,7 @@ STL 对定义的通用容器分三类：**顺序性容器**、**关联式容器*
 
 vector 是一段连续的内存块，而deque 是多个连续的内存块， list 是所有数据元素分开保存，可以是任何两个元素没有连续。
 
-<img src="C++.assets/20180911150322479" alt="img"  />
+<img src="photo/20180911150322479" alt="img"  />
 
 vector 的查询性能最好，并且在末端增加数据也很好，除非它重新申请内存段；适合高效地随机存储。
 
