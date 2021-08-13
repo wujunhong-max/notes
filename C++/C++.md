@@ -4027,7 +4027,44 @@ int main()
 }
 ```
 
+## 3. 文件重定向
+### 3.1 定义
+当测试程序时，如果有许多数据，反复从键盘敲入输入是非常麻烦的。
+大多数操作系统支持**文件重定向**，这种机制允许我们将标准输入和标准输出与命名文件关联起来
+`$ addItems <infile> outfile `
+假定$是操作系统提示符，我们的加法程序已经编译为名为addItems.exe的可执行文件(在UNIX中是addItems),则上述命令会从一个名为infile的文件读取数据，并将输出结果写入到一个名为outfile的文件中。
+### 3.2 用freopen()函数实现重定向
+
+```cpp
+#include<iostream>
+#include<string>
+#include<stdio.h>
+using namespace std;
+
+int main()
+{
+	string name,url;
+	freopen("in.txt", "r" , stdin);
+	cin >> name >> url;
+	freopen("out.txt", "w", stdout);
+	cout << name << "\n" << url;
+	return 0;
+}
+```
+> 先在当前目录下创建一个名为in.txt的文件，其包含的内容如下：
+> C++
+> www.baidu.com
+>
+>
+> 然后执行此程序，在命令行界面不需要手动输入，也没有任何输出。
+> 会自动生成一个名为out.txt的文件
+
+**总结：通过2次调用freopen()函数，分别对输入流和输出流重定向，
+使得cin不再接收由键盘输入的数据，而是直接从in.txt文件中获得，
+cout也不再将数据输出到屏幕上，而是写入到out.txt文件**
+
 # 九、模板
+
 ## 1. 模板的概念
 模板是泛型编程的基础，泛型编程即以一种独立于任何特定类型的方式编写代码。
 
@@ -4930,4 +4967,10 @@ STL 中提供的三种适配器可以由某一种顺序容器去实现。默认�
 队列queue 的特点是先进先出，适配器要求其关联的基础容器必须提供pop_front 操作，因此其不能建立在vector 容器上；
 
 优先级队列priority_queue 适配器要求提供随机访问功能，因此不能建立在list 容器上。
+
+
+
+
+
+
 
