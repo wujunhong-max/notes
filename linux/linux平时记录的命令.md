@@ -14,7 +14,7 @@
 
 # 怎么查看Linux进程id
 
->  ps -ef | grep "***"
+>  ps -aux | grep "执行的文件名"
 
 # 查看Linux下的ip
 
@@ -63,3 +63,40 @@ rm  [选项] 文件名
 ## 查看树莓派的内存
 
 > df -h
+
+# ssh连接
+
+> ssh  用户名@ip名
+
+## 树莓派开机启动
+
+> 使用systemctl控制开机自动启动
+
+## 重启
+
+> sudo reboot
+
+## 查看摄像头是否有效
+
+> 使用cheese命令
+>
+> 安装
+>
+> sudo apt-get install cheese
+
+## 报错Failed to fetch的问题
+
+>  #设置妥当DNS服务器 
+>
+> sudo vi /etc/resolv.conf 
+>
+> #保存后，联网更新一下 
+>
+> sudo apt-get update
+
+## 安装SDL2
+
+```
+sudo apt-get install libsdl2-dev
+```
+

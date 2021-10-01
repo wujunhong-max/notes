@@ -15,3 +15,6 @@
 ipconfig /flushdns
 ```
 
+## 键盘解锁
+
+> Fn键+F9~11
