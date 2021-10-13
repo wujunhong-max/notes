@@ -68,15 +68,15 @@ rm  [选项] 文件名
 
 > ssh  用户名@ip名
 
-## 树莓派开机启动
+# 树莓派开机启动
 
 > 使用systemctl控制开机自动启动
 
-## 重启
+# 重启
 
 > sudo reboot
 
-## 查看摄像头是否有效
+# 查看摄像头是否有效
 
 > 使用cheese命令
 >
@@ -84,7 +84,7 @@ rm  [选项] 文件名
 >
 > sudo apt-get install cheese
 
-## 报错Failed to fetch的问题
+# 报错Failed to fetch的问题
 
 >  #设置妥当DNS服务器 
 >
@@ -94,9 +94,22 @@ rm  [选项] 文件名
 >
 > sudo apt-get update
 
-## 安装SDL2
+# 安装SDL2
 
 ```
 sudo apt-get install libsdl2-dev
 ```
 
+# Vim的操作
+
+按 i 进入编辑模式
+
+按Esc进入命令行模式
+
+输入:w 保存文件
+
+输入:q 退出
+
+输入！强制操作
+
+输入  :%d  删除所有内容
