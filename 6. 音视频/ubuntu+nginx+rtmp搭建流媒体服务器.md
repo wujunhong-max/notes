@@ -167,7 +167,7 @@ cd nginx-1.19.9
 // --prefix=PATH            set installation prefix（设置安装前缀）
 // --add-module=PATH        enable external module （启用外部模块）
 sudo ./configure --prefix=/usr/local/nginx --with-debug --with-pcre=../pcre-8.40 --with-zlib=../zlib-1.2.11 --with-openssl=../openssl-1.0.2k --add-module=../nginx-rtmp-module
-
+    
 sudo make
 sudo make install
 cd ..
