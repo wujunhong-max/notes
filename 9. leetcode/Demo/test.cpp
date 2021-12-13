@@ -1,70 +1,71 @@
 #include<iostream>
 #include<algorithm>
 #include<cmath>
+#include<string>
 #include<vector>
 using namespace std;
 
-#if 0
-int main()
-{
-    vector<int> num = {1,2,0,0};
-    int k=34;
-    // for(vector<int>::iterator it= num.begin(); it!= num.end(); it++)
-    // {
-    //     cout << *it << endl;  // 1, 2, 0, 0  从左往右
-    // }
-    int count = 0;
-    // for(int i=0; i<num.size(); i++)
-    // {
-    //     count += num[i] * pow(10, num.size()-i-1);
-    // }
-    // count += k;
-    cout << count <<endl;
-    vector<int> num1;
-    while(count)
-    {
-        num1.push_back(count%10);
-        count /= 10;
-    }
-    std::reverse(num1.begin(), num1.end());
-     for(vector<int>::iterator it= num1.begin(); it!= num1.end(); it++)
-    {
-        cout << *it << endl;  // 1, 2, 0, 0  从左往右
-    }
-    return 0;
-}
-# endif
 
 int main()
 {
-    vector<int> num = {2,1,5};
-    int k=806;
+    string  s = "loveleetcode";
+    char c = 'e';
 
-    vector<int> num1;
-
-    int n= num.size();
-    for(int i = n-1; i>=0; i--)
+    vector<int> answer;
+    vector<int> a;
+    // 将相同字符的位置放进数组a中
+    for(int i=0; i<s.length(); i++)
     {
-        int sum = num[i]+k%10;
-        k /= 10;
-        if(sum>=10)
+        if(s[i] == c)
         {
-            k++;
+            a.push_back(i);
         }
-        num1.push_back(sum%10);
-        sum = 0;
-    }
-    cout << k;
-    while(k>0)
-    {
-        num1.push_back(k%10);
-        k /= 10;
-    }
-    reverse(num1.begin(), num1.end());
+    } 
+    int k = a.size();
 
-    for(vector<int>::iterator it= num1.begin(); it!= num1.end(); it++)
+    for(vector<int>::iterator it = a.begin(); it != a.end();it++)
     {
-        cout << *it << " ";  // 1, 2, 0, 0  从左往右
+        cout << *it << " ";  // 3 5 6 11
+    }
+    cout << endl;
+    cout << k << endl;
+    int x=0, y=0;
+    // 遍历数组answer
+    for(int i=0; i<s.size(); i++)
+    {
+        if(i+1>a[y+1])
+            y++;
+        if(k <= 0)  break;
+        if(k>0 && i == a[x])
+        {
+            answer.push_back(0);
+            if(x<k-1)
+                x++;
+        }
+        else if(k>0 && i<a[0])
+        {
+            answer.push_back(abs(i-a[0]));
+        }
+        else if(k>1 && a[0] < i < a[k-1])
+        {
+            int num = min(abs(i-a[y]), abs(a[y+1]-i));
+            answer.push_back(num);
+            if(i==7) 
+            {
+                cout << y<<  " " <<abs(i-a[y]) << " " << abs(a[y+1]-i) << " " << num <<endl;
+            }
+            
+            num = 0;
+        }
+        else if(k>0 && i>a[k-1])
+        {
+            answer.push_back(abs(i-a[k-1]));
+        }
+    }
+    cout << endl;
+    for(vector<int>::iterator it = answer.begin(); it != answer.end();it++)
+    {
+        cout << *it << " ";  // 3 5 6 11
     }
     cout << endl;
     return 0;
