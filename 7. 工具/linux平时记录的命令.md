@@ -212,3 +212,15 @@ systemctl start firewalld.service
 
 解决方法：sed -i "s/\r//" a.sh
 
+# 查找同一局域网中可以ping通的ip
+
+```
+for /L %i IN (1,1,254) DO ping -w 1 -n 1 192.168.3.%i
+```
+
+# 查看网卡
+
+```
+ip addr
+```
+
