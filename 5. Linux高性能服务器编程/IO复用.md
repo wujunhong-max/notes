@@ -78,23 +78,13 @@ select, poll, epoll
 
 ![img](img/20161207091547078)
 
-## poll
+# select
 
-### 函数原型
 
-```c
-#include<poll.h>
 
-int poll(struct pollfd *fds, nfd_s nfds, int timeout)
-```
+# poll
 
-```c
-struct pollfd{
+# epoll
 
-int fd;      /* file fescriptor */
-short events;   /* requested events */
-short revents;  /* returned events */
 
-}
-```
 
