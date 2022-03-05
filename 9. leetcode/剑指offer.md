@@ -1256,3 +1256,112 @@ public:
 };
 ```
 
+# 双指针
+
+# 18. 删除链表的节点
+
+## 题目
+
+![1646493021348](img/1646493021348.png)
+
+## 题解
+
+### 思路
+
+- 创建一个新节点，并将头指针head指向新节点，这样就不用考虑头节点的特殊
+- 遍历链表，然后删除节点
+
+```cpp
+class Solution {
+public:
+    ListNode* deleteNode(ListNode* head, int val) {
+            ListNode* temp = new ListNode(1);
+            temp->next = head;
+            head = temp;
+        
+            while(temp->next != NULL)
+            {
+                if(temp->next->val == val)
+                {
+                    temp->next = temp->next->next;
+                    return head->next;
+                }
+                temp = temp->next;
+            }
+            return head->next;
+    }
+};
+```
+
+# 22. 链表中倒数第k个节点
+
+## 题目
+
+![1646494023559](img/1646494023559.png)
+
+## 题解
+
+### 思路
+
+- 先求出链表的长度n， 然后顺序遍历到链表的第n-k个节点返回即可
+
+```cpp
+class Solution {
+public:
+    ListNode* getKthFromEnd(ListNode* head, int k) {
+        int n = 0;
+        ListNode* node = NULL;
+        for(node = head; node; node = node->next)
+        {
+            n++;
+        }
+        for(node = head; n>k; n--)
+        {
+            node = node->next;
+        }
+        return node;
+    }
+};
+```
+
+# 25. 合并两个排序的链表
+
+## 题目
+
+![1646495712084](img/1646495712084.png)
+
+## 题解
+
+### 思路
+
+- 用两个指针p1和p2分别表示两个链表遍历到的位置
+- 比较p1->val和p2->val，将其加到新链表上
+
+```cpp
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        // 用p1和p2表示遍历到的位置
+        ListNode* p1 = l1;
+        ListNode* p2 = l2;
+        ListNode* newhead = new ListNode(1);
+        ListNode* q = newhead;
+        while(p1 && p2)
+        {
+            if(p1->val <= p2->val)
+            {
+                q->next = p1;
+                p1 = p1->next;
+            }else
+            {
+                q->next = p2;
+                p2 = p2->next;
+            }
+            q = q->next;
+        }
+        q->next = (p1 ? p1: p2);
+        return newhead->next;
+    }
+};
+```
+
