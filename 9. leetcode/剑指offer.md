@@ -6,9 +6,7 @@
 
 ![1645098034441](img/1645098034441.png)
 
-## 第一次题解
-
-### 思路
+## 思路
 
 - 用两个栈a1和a2来模拟队列，a1模拟队尾的插入，a2模拟队头的删除
 - 考虑栈a2中可能还有数据，将全部数据移动到a1中，再插入
@@ -19,10 +17,11 @@
 class CQueue {
 public:
     CQueue() {
-        
+
     }
+    
     void appendTail(int value) {
-        while(!a2.empty())
+        while(! a2.empty())
         {
             a1.push(a2.top());
             a2.pop();
@@ -31,33 +30,22 @@ public:
     }
     
     int deleteHead() {
-        while(!a1.empty())
+        while(! a1.empty())
         {
             a2.push(a1.top());
             a1.pop();
         }
         if(a2.empty())
             return -1;
-        else
-        {
-            num = a2.top();
-            a2.pop();
-            return num;
-        }      
+        value = a2.top();
+        a2.pop();
+        return value;
     }
-
-public:
+private:
     stack<int> a1;
     stack<int> a2;
-    int num = -1;
+    int value = -1;
 };
-
-/**
- * Your CQueue object will be instantiated and called as such:
- * CQueue* obj = new CQueue();
- * obj->appendTail(value);
- * int param_2 = obj->deleteHead();
- */
 ```
 
 # 30.包含min函数的栈
@@ -193,15 +181,15 @@ public:
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        ListNode* a = new ListNode(sizeof(ListNode));
-        ListNode* b;
-        a->next = head;
-
         if(head == NULL) 
             return NULL;
+        
+        ListNode* a = new ListNode(1);
+        a->next = head;
+
         while(head->next)
         {
-            b = head->next;
+            ListNode* b = head->next;
             head->next = head->next->next;   // 取出b节点
             // 头插法
             b->next = a->next;
@@ -293,6 +281,7 @@ public:
             Node* nodeNew = node->next;
             nodeNew->random = (node->random != nullptr)? node->random->next: nullptr;
         }
+        
         Node* headnew = head->next;
         for(Node* node = head; node != nullptr; node = node->next)
         {
@@ -323,21 +312,14 @@ public:
     string replaceSpace(string s) {
         string array;
 
-        for(int i=0; i<s.size(); i++)
+        for(char& ch: s)
         {
-            if(s[i] == ' ')
-            {
-               // 或者  array += "%20";
-               array.push_back('%');
-               array.push_back('2');
-               array.push_back('0');
-            }
-            else
-            {
-                //或者  array += s[i];
-                array.push_back(s[i]);
-            }
+            if(ch == ' ')
+                array += "%20";
+            else 
+                array += ch;
         }
+
         return array;
     }
 };
@@ -377,31 +359,7 @@ public:
 
 ![1645365386202](img/1645365386202.png)
 
-## 第一次题解
-
-```cpp
-class Solution {
-public:
-    int findRepeatNumber(vector<int>& nums) {
-        unordered_map<int, int> array;
-        int val = 0;
-
-        for(int i=0; i<nums.size(); i++)
-        {
-            // 如果有重复的
-            if(array.count(nums[i]))
-            {
-                array[nums[i]] += 1;
-                return nums[i];
-            }
-            array[nums[i]] = val;
-        }
-        return -1;
-    }
-};
-```
-
-## 官方题解
+## 题解
 
 ```cpp
 class Solution {
@@ -440,27 +398,13 @@ public:
 class Solution {
 public:
     int search(vector<int>& nums, int target) {
-       int count = 0, left = 0, right = nums.size()-1;
-       for(int i=0; i<nums.size(); i++)
-       {
-           if(nums[i] == target)
-           {
-               left = i;
-               break;
-           }
-       }
-       while(left <= right)
-       {
-           if(nums[left] == target)
-           {
-               count++;
-               left++;
-           }
-           else
-           {
-               break;
-           }
-       }
+        // 暴力
+        int count = 0;
+        for(auto& sh: nums)
+        {
+            if(sh == target)
+                count++;
+        }
         return count;
     }
 };
@@ -471,7 +415,7 @@ public:
 ### 思路
 
 - 用二分查找算法得到目标值第一次出现的位置和大于目标值的位置
-- 然后就能得到重复的次数
+- 因为是有序数组，相减得到重复的次数
 
 ```cpp
 class Solution {
@@ -482,7 +426,7 @@ public:
         while(left <= right)
         {
             // 取中
-            int mid = (left + right) / 2;
+            int mid = left + (left -  right) / 2;
             // 大于目标，则在左边，移动right
             if(nums[mid] > target || (lower && nums[mid] >= target) )
             {
@@ -526,25 +470,23 @@ public:
 - 跳出时，变量left和right分别指向“右子数组的首位元素”和“左子数组的末位元素”， 因此返回left即可
 
 ```cpp
-class Solution { 
+class Solution {
 public:
     int missingNumber(vector<int>& nums) {
-        // 二分法
-        int left = 0, right = nums.size()-1, target = -1;
+        int left = 0, right = nums.size()-1;
         while(left <= right)
         {
-            int mid = (left + right)/2;
-            // nums[i] == i, 则缺失数字在右边
-            if(nums[mid] == mid) 
+            int mid = left + (right - left) / 2;
+            if(nums[mid] == mid)
             {
-                left = mid+1;
-            }
-            else 
-            {
-                right = mid-1;
+                // 相等表示前面是没有缺失数，按序的
+                // 在右半部分查找
+                left = mid + 1;
+            }else{
+                right = mid - 1;
             }
         }
-        // 缺失的数字是最后一次循环的mid +1, 故返回left
+        // 缺失的数字是最后一次循环的mid+1,故返回left
         return left;
     }
 };
@@ -623,9 +565,12 @@ public:
 
 ### 思路
 
-- 将数组中的数字与最后一个值比较，可以划分为两个部分
-- 前面一个部分中的数字大于最后一个值
-- 后面一个部分中的数字小于最后一个值
+- 旋转数组后，数组分为两部分：左排序递增数组和右排序递增数组，且左边数组的值大于等于右边数组的值
+- 我们的目标是寻找右排序数组的最小元素x，设m=( i + j ) / 2 为每次二分算法的中点
+- 当  nums[m] > nums[j] 时， m一定在左排序数组中，即旋转点x一定在【m+1，j】闭区间内，因此执行i=m+1
+- 当  nums[m] < nums[j] 时， m一定在右排序数组中，即旋转点x一定在【i， m】闭区间内， 因此执行j = m
+- 当  nums[m] = nums[j] 时， 无法判断m在哪个排序数组中，执行j = j-1 缩小判断范围
+- 返回值：当i=j时跳出二分循环，并返回旋转点的值nums[i]
 
 ```cpp
 class Solution {
@@ -667,26 +612,21 @@ public:
 class Solution {
 public:
     char firstUniqChar(string s) {
-        char a = ' '; 
+        char a = ' ';
         unordered_map<char, int> map;
 
         if(s.size() == 0)
-        {
             return a;
-        }
-        for(int i=0; i<s.size(); i++)
+        for(auto& ch: s)
         {
-            map[s[i]] += 1;
+            map[ch]++;
         }
-        for(int i=0; i<s.size(); i++)
+        for(auto& ch: s)
         {
-            if(map[s[i]] == 1)
-            {
-                a = s[i];
-                break;
-            }
+            if(map[ch] == 1)
+                return ch;
         }
-        return a;    
+        return a;
     }
 };
 ```
@@ -697,7 +637,7 @@ public:
 
 ## 题目
 
-![1645761049028](img/1645761049028.png)
+![1645761049028](img/	)
 
 ## 题解
 
@@ -735,7 +675,7 @@ public:
         }
         queue<TreeNode*> que;
         que.push(root);
-        while(que.size())
+        while(!que.empty())
         {
             TreeNode* target = que.front();
             que.pop();
@@ -1000,24 +940,7 @@ public:
 
 ![1645884580606](img/1645884580606.png)
 
-## 递归
 
-### 思路
-
-- 可以用递归，但是超时了
-
-```cpp
-class Solution {
-public:
-    int fib(int n) {
-        if(n == 0)
-            return 0;
-        if(n == 1)
-            return 1;
-        return fib(n-1)+fib(n-2);
-    }
-};
-```
 
 ## 动态规划
 
@@ -1071,6 +994,14 @@ public:
         return sum;
     }
 };
+```
+
+```
+n-1个台阶有f(n-1)种跳法，最后还剩一个台阶，最后青蛙只能最后一跳
+n-2个台阶有f(n-2)种跳法，最后剩余二个台阶，有两种跳法：
+       ①一次跳两个台阶
+       ②一次跳一个台阶  但是这种跳法其实已经在n-1个台阶里包含了，所以
+ f(n)=f(n-1)+f(n-2)
 ```
 
 # 63. 股票的最大利润
@@ -1365,3 +1296,277 @@ public:
 };
 ```
 
+# 52. 两个链表的第一个公共节点
+
+## 题目
+
+![1646555957587](img/1646555957587.png)
+
+![1646555978969](img/1646555978969.png)
+
+![1646555989252](img/1646555989252.png)
+
+![1646556000973](img/1646556000973.png)
+
+## 题解
+
+### 思路
+
+-  只有当链表headA和headB 都不为空时，两个链表才可能相交
+-  每步操作需要同时更新指针 pA 和 pB
+- 如果指针 pA  不为空，则将指针pA  移到下一个节点；如果指针  pB 不为空，则将指针  pB 移到下一个节点
+- 如果指针 pA  为空，则将指针pA  移到链表 pB 的头节点；如果指针 pB 为空，则将指针 pB 移到链表 pA  的头节点
+
+- 当指针 pA  和 pB 指向同一个节点或者都为空时，返回它们指向的节点或者 null
+
+```cpp
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        if(headA == NULL || headB == NULL)  return NULL;
+        ListNode* n1 = headA;
+        ListNode* n2 = headB;
+
+        while(n1 != n2)
+        {
+            n1 = (n1 == NULL)? headB : n1->next;
+            n2 = (n2 == NULL)? headA : n2->next;
+        }
+        return n1;
+    }
+};
+```
+
+# 21. 调整数组顺序使奇数位于偶数前面
+
+## 题目
+
+![1646556817018](img/1646556817018.png)
+
+## 题解
+
+### 思路
+
+- 考虑用两个数组，一个存储奇数，一个存储偶数
+- 然后将偶数数组中的数据压入奇数数组中
+- 返回奇数数组
+
+```cpp
+class Solution {
+public:
+    vector<int> exchange(vector<int>& nums) {
+        vector<int>  odd;
+        vector<int> even;
+        int n = nums.size();
+        for(int i=0; i<nums.size(); i++)
+        {
+            if(nums[i] %2 == 0){
+                even.push_back(nums[i]);
+            }
+            else{
+                odd.push_back(nums[i]);
+            }
+        }
+        while(!even.empty())
+        {
+            odd.push_back(even.back());
+            even.pop_back();
+        }
+        return odd;
+    }
+};
+```
+
+## 双指针
+
+### 思路
+
+- 指针i从左到右寻找偶数
+- 指针j从右到左寻找奇数
+- 将偶数nums[i] 和奇数nums[j] 交换
+
+```cpp
+class Solution {
+public:
+    vector<int> exchange(vector<int>& nums) {
+        int i = 0;
+        int j = nums.size()-1;
+
+        while(i < j)
+        {
+            while(i < j && nums[i] % 2 == 1) i++;
+            while(i < j && nums[j] % 2 == 0) j--;
+            swap(nums[i], nums[j]);
+        }
+        return nums;
+    }
+};
+```
+
+# 57. 和为s的两个数字
+
+## 题目
+
+![1646557929890](img/1646557929890.png)
+
+## 题解
+
+### 思路
+
+- 二分查找
+
+```cpp
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        int pivot, left = 0, right = nums.size()-1;
+        vector<int> a;
+        for(int i=0; i<nums.size(); i++)
+        {
+            left = i;
+            while(left <= right)
+            {
+                pivot = left + (right - left) / 2;
+                if(nums[pivot] == target-nums[i]) return { nums[i], target-nums[i]};
+                if(nums[pivot] < target-nums[i]) left = pivot+1;
+                else    right = pivot-1;
+            }
+        }
+        return a;
+    }
+};
+```
+
+## 双指针
+
+### 思路
+
+-  双指针 i , j分别指向数组 nums 的左右两端 *（俗称对撞双指针）*。 
+-  当双指针相遇时跳出
+  - 计算和 s = nums[i] + nums[j] ；
+  - 若 s > target ，则指针 j 向左移动，即执行 j = j - 1 ；
+  - 若 s < target ，则指针 i 向右移动，即执行 i = i + 1 ；
+  - 若 s = target ，立即返回数组 { nums[i], nums[j] }；
+
+```cpp
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        int i = 0;
+        int j = nums.size()-1;
+        vector<int> a;
+        while(i < j)
+        {
+            if(nums[i] == target - nums[j]) return {nums[i], nums[j]};
+            if(nums[i] > target - nums[j]) j--;
+            else i++;
+        }
+        return a;
+    }
+};
+```
+
+# 58.  Ι. 翻转单词顺序
+
+## 题目
+
+![1646722661700](img/1646722661700.png)
+
+![1646722673994](img/1646722673994.png)
+
+## 题解
+
+### 思路
+
+- 套用模板
+
+```cpp
+class Solution {
+public:
+    string reverseWords(string s) {
+        if(s.empty())
+            return "";
+        s += ' '; 			// // 这里在最后一个字符位置加上空格，这样最后一个字符串就不会遗漏
+        vector<string> res;  // 字符串数组
+        string temp = "";    // 临时字符串
+        for(char& ch : s)	 // 遍历字符串，相当于for(int i=0; i<size(); i++)
+        {
+            if(ch == ' ')	// 遇到空格
+            {
+                if(! temp.empty())	// 临时字符串非空
+                {
+                    res.push_back(temp);
+                    temp.clear();	// 清空临时字符串
+                }
+            }
+            else
+            {
+                temp += ch;
+            }
+        }
+        int n = res.size();
+        for(int i = n-1; i >= 0; i--)
+        {
+            temp += res[i];
+            temp += " ";
+        }
+        temp.pop_back();
+        return temp;
+    }
+};
+```
+
+# 搜索与回溯算法
+
+# 12. 矩阵中的路径
+
+## 题目
+
+![1646820536075](img/1646820536075.png)
+
+![1646820547490](img/1646820547490.png)
+
+## 题解
+
+### 思路
+
+- 典型的矩阵搜索问题，可以使用**深度优先搜索(DFS) + 剪枝**解决
+- 深度优先搜索：暴力法遍历矩阵中所有字符串可能性。DFS通过递归，先朝一个方向搜到底，再回溯至上个节点，沿另一个方向搜索
+-  **剪枝：** 在搜索中，遇到 `这条路不可能和目标字符串匹配成功` 的情况（*例如：此矩阵元素和目标字符不同、此元素已被访问）*，则应立即返回，称之为 `可行性剪枝` 
+
+```cpp
+class Solution {
+public:
+    bool exist(vector<vector<char>>& board, string word) {
+        rows = board.size();
+        cols = board[0].size();
+        // 初始点不止左上角，可以是矩阵中的任意点
+        for(int i = 0; i < rows; i++)
+        {
+            for(int j = 0; j < cols; j++)
+            {
+                if(dfs(board, word, i, j, 0)) // if 0就会去找下一个起始节点
+                    return true;
+            }
+        }
+        return false;
+    }
+private:
+    bool dfs(vector<vector<char>>& board, string word, int i, int j, int k)
+    {
+        if(i >= rows || i < 0 || j >= cols || j < 0 || board[i][j] != word[k])
+            return false;
+        if(k == word.size()-1)
+            return true;
+        // 将其变化为/0， 表示已经走过了
+        board[i][j] = '/0';
+        bool res = dfs(board, word, i+1, j, k+1) || dfs(board, word, i-1, j, k+1) || dfs(board, word, i, j+1, k+1) || dfs(board, word, i, j-1, k+1);
+        board[i][j] = word[k];
+        return res;
+    }
+    int rows;
+    int cols;
+};
+```
+
+z
